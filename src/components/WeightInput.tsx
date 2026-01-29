@@ -21,8 +21,8 @@ export function WeightInput({ onAdd }: WeightInputProps) {
     
     if (isNaN(weightValue) || weightValue <= 0 || weightValue > 50) {
       toast({
-        title: '输入错误',
-        description: '请输入有效的体重值 (0.1 - 50 kg)',
+        title: 'Invalid Input',
+        description: 'Please enter a valid weight (0.1 - 50 kg)',
         variant: 'destructive',
       });
       return;
@@ -35,14 +35,20 @@ export function WeightInput({ onAdd }: WeightInputProps) {
     setTimeout(() => setShowSuccess(false), 2000);
     
     toast({
-      title: '记录成功',
-      description: `已记录体重 ${weightValue.toFixed(1)} kg`,
+      title: 'Recorded',
+      description: `Weight ${weightValue.toFixed(1)} kg has been saved`,
     });
   };
 
+  const todayFormatted = new Date().toLocaleDateString('en-US', { 
+    weekday: 'long',
+    month: 'long', 
+    day: 'numeric' 
+  });
+
   return (
-    <Card className="border-border/50">
-      <CardContent className="p-4">
+    <Card className="border-border/50 bg-card/80 backdrop-blur-sm">
+      <CardContent className="p-5">
         <form onSubmit={handleSubmit} className="flex gap-3">
           <div className="relative flex-1">
             <Input
@@ -50,10 +56,10 @@ export function WeightInput({ onAdd }: WeightInputProps) {
               step="0.1"
               min="0.1"
               max="50"
-              placeholder="输入体重"
+              placeholder="Enter weight"
               value={weight}
               onChange={(e) => setWeight(e.target.value)}
-              className="pr-10 text-base h-11"
+              className="pr-10 text-base h-11 bg-background/50"
             />
             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">
               kg
@@ -69,13 +75,13 @@ export function WeightInput({ onAdd }: WeightInputProps) {
             ) : (
               <>
                 <Plus className="h-4 w-4 mr-1" />
-                记录
+                Record
               </>
             )}
           </Button>
         </form>
-        <p className="text-xs text-muted-foreground mt-2 text-center">
-          今日 {new Date().toLocaleDateString('zh-CN', { month: 'long', day: 'numeric' })}
+        <p className="label-premium mt-3 text-center">
+          {todayFormatted}
         </p>
       </CardContent>
     </Card>
