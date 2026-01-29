@@ -28,13 +28,12 @@ interface WeightHistoryProps {
 export function WeightHistory({ records, onDelete }: WeightHistoryProps) {
   const [isOpen, setIsOpen] = useState(false);
 
-  // 按日期倒序显示
   const sortedRecords = [...records].sort((a, b) => 
     new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 
   const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString('zh-CN', {
+    return new Date(dateStr).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
@@ -46,14 +45,14 @@ export function WeightHistory({ records, onDelete }: WeightHistoryProps) {
   }
 
   return (
-    <Card className="border-border/50">
+    <Card className="border-border/50 bg-card/80 backdrop-blur-sm">
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <CollapsibleTrigger asChild>
-          <CardHeader className="py-3 px-4 cursor-pointer hover:bg-muted/50 transition-colors">
+          <CardHeader className="py-4 px-5 cursor-pointer hover:bg-muted/50 transition-colors">
             <div className="flex items-center justify-between">
-              <CardTitle className="text-base font-medium">历史记录</CardTitle>
+              <CardTitle className="font-serif text-lg font-medium">History</CardTitle>
               <div className="flex items-center gap-2 text-muted-foreground">
-                <span className="text-sm">{records.length} 条</span>
+                <span className="label-premium">{records.length} records</span>
                 {isOpen ? (
                   <ChevronUp className="h-4 w-4" />
                 ) : (
@@ -64,12 +63,12 @@ export function WeightHistory({ records, onDelete }: WeightHistoryProps) {
           </CardHeader>
         </CollapsibleTrigger>
         <CollapsibleContent>
-          <CardContent className="pt-0 pb-4 px-4 max-h-[300px] overflow-y-auto">
+          <CardContent className="pt-0 pb-4 px-5 max-h-[300px] overflow-y-auto">
             <div className="space-y-1">
               {sortedRecords.map((record) => (
                 <div
                   key={record.date}
-                  className="flex items-center justify-between py-2 px-2 rounded-md hover:bg-muted/50 group"
+                  className="flex items-center justify-between py-2 px-3 rounded-md hover:bg-muted/50 group"
                 >
                   <span className="text-sm text-muted-foreground">
                     {formatDate(record.date)}
@@ -88,15 +87,15 @@ export function WeightHistory({ records, onDelete }: WeightHistoryProps) {
                       </AlertDialogTrigger>
                       <AlertDialogContent>
                         <AlertDialogHeader>
-                          <AlertDialogTitle>删除记录</AlertDialogTitle>
+                          <AlertDialogTitle className="font-serif">Delete Record</AlertDialogTitle>
                           <AlertDialogDescription>
-                            确定要删除 {formatDate(record.date)} 的记录吗？此操作无法撤销。
+                            Are you sure you want to delete the record from {formatDate(record.date)}? This action cannot be undone.
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
-                          <AlertDialogCancel>取消</AlertDialogCancel>
+                          <AlertDialogCancel>Cancel</AlertDialogCancel>
                           <AlertDialogAction onClick={() => onDelete(record.date)}>
-                            删除
+                            Delete
                           </AlertDialogAction>
                         </AlertDialogFooter>
                       </AlertDialogContent>

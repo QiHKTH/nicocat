@@ -1,5 +1,5 @@
 import { Card, CardContent } from '@/components/ui/card';
-import { TrendingUp, TrendingDown, Minus, Scale, Activity, ArrowUp, ArrowDown } from 'lucide-react';
+import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
 
 interface WeightStatsProps {
   current: number | null;
@@ -28,51 +28,53 @@ export function WeightStats({ current, average, max, min, change, total }: Weigh
 
   const stats = [
     {
-      label: '当前体重',
-      value: current !== null ? `${current} kg` : '-',
-      icon: <Scale className="h-5 w-5" />,
+      label: 'Current',
+      value: current !== null ? `${current}` : '-',
+      unit: 'kg',
     },
     {
-      label: '平均体重',
-      value: average !== null ? `${average} kg` : '-',
-      icon: <Activity className="h-5 w-5" />,
+      label: 'Average',
+      value: average !== null ? `${average}` : '-',
+      unit: 'kg',
     },
     {
-      label: '最高体重',
-      value: max !== null ? `${max} kg` : '-',
-      icon: <ArrowUp className="h-5 w-5" />,
+      label: 'High',
+      value: max !== null ? `${max}` : '-',
+      unit: 'kg',
     },
     {
-      label: '最低体重',
-      value: min !== null ? `${min} kg` : '-',
-      icon: <ArrowDown className="h-5 w-5" />,
+      label: 'Low',
+      value: min !== null ? `${min}` : '-',
+      unit: 'kg',
     },
   ];
 
   return (
-    <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
-      {stats.map((stat) => (
-        <Card key={stat.label} className="border-border/50">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-2 text-muted-foreground mb-2">
-              {stat.icon}
-              <span className="text-xs font-medium">{stat.label}</span>
-            </div>
-            <p className="text-2xl font-semibold tracking-tight">{stat.value}</p>
-          </CardContent>
-        </Card>
-      ))}
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+        {stats.map((stat) => (
+          <Card key={stat.label} className="border-border/50 bg-card/80 backdrop-blur-sm">
+            <CardContent className="p-5">
+              <span className="label-premium block mb-2">{stat.label}</span>
+              <div className="flex items-baseline gap-1">
+                <span className="value-premium">{stat.value}</span>
+                <span className="text-sm text-muted-foreground">{stat.unit}</span>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
       
-      {/* 变化趋势 - 单独处理 */}
-      <Card className="col-span-2 md:col-span-4 border-border/50">
-        <CardContent className="p-4 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-muted-foreground">
+      {/* Trend Card */}
+      <Card className="border-border/50 bg-card/80 backdrop-blur-sm">
+        <CardContent className="p-5 flex items-center justify-between">
+          <div className="flex items-center gap-2">
             {getTrendIcon()}
-            <span className="text-sm font-medium">相比上次</span>
+            <span className="label-premium">Since Last Record</span>
           </div>
           <div className="flex items-center gap-4">
             <span className="text-lg font-semibold">{formatChange()} kg</span>
-            <span className="text-xs text-muted-foreground">共 {total} 条记录</span>
+            <span className="text-xs text-muted-foreground">{total} records</span>
           </div>
         </CardContent>
       </Card>
