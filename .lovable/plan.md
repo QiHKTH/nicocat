@@ -1,151 +1,139 @@
 
 
-# Nico Weight Tracker - Nordic Luxury Redesign
+# Edit Feature, Profile Optimization & Typography Enhancement
 
-A complete visual transformation inspired by Swedish fine dining websites and high-end photography portfolios. The design will feature Nico's photo as an immersive hero background with the weight chart as the centerpiece.
-
----
-
-## Design Philosophy
-
-**Inspiration Sources:**
-- Swedish Michelin-starred restaurant websites (Noma, Faviken aesthetic)
-- Nordic photography portfolios with cinematic compositions
-- Scandinavian minimalism with warm, organic tones
-
-**Key Visual Elements:**
-- Full-bleed hero image with gradient fade
-- Premium serif typography for headings (Playfair Display)
-- Clean sans-serif for data (Inter)
-- Muted earth tones: warm grays, soft creams, subtle sage accents
-- Generous whitespace and elegant spacing
+This plan covers three improvements: adding an Edit feature for historical data, streamlining the cat profile display, and enhancing typography with premium fonts.
 
 ---
 
-## Page Structure
+## 1. Edit Data Feature
+
+Add an "Edit" button to the toolbar that opens a dialog/sheet for managing weight records.
+
+### Implementation Approach
+
+**New Component: DataEditor**
+- A Sheet (slide-out panel) containing:
+  - A form to add records for any date (past or future)
+  - A list of existing records with inline edit capability
+  - Delete option for each record
+
+**ToolBar Enhancement**
+- Add "Edit" button between "Export CSV" and "Clear Data"
+- Opens the DataEditor sheet when clicked
+
+**WeightInput Enhancement**
+- Add optional date picker to allow recording past dates
+- The existing "Record" flow remains for quick today's entries
+
+### UI Flow
 
 ```text
-+--------------------------------------------------+
-|                                                  |
-|     [Hero Section - Full Screen]                 |
-|     Cat photo background with gradient overlay   |
-|                                                  |
-|              "NICO"                              |
-|         Weight Journey                           |
-|                                                  |
-+--------------------------------------------------+
-|                                                  |
-|     [Weight Chart - Hero Element]                |
-|     Large, prominent chart floating above        |
-|     Semi-transparent glassmorphism card          |
-|                                                  |
-+--------------------------------------------------+
-|                                                  |
-|     [Cat Profile Section]                        |
-|     Name, Breed, Birthday, Adoption, Neutered    |
-|     Elegant card with subtle border              |
-|                                                  |
-+--------------------------------------------------+
-|                                                  |
-|     [Stats Grid]                                 |
-|     Current | Average | Max | Min                |
-|                                                  |
-+--------------------------------------------------+
-|                                                  |
-|     [Weight Input]                               |
-|     Minimal, elegant input bar                   |
-|                                                  |
-+--------------------------------------------------+
-|                                                  |
-|     [History + Tools]                            |
-|     Collapsible history, Export/Clear            |
-|                                                  |
-+--------------------------------------------------+
-|                                                  |
-|     [Footer]                                     |
-|     "Data stored locally in your browser"        |
-|                                                  |
-+--------------------------------------------------+
+ToolBar: [Export CSV] [Edit Data] [Clear Data]
+                         |
+                         v
+              +-------------------+
+              |   Edit Records    |
+              +-------------------+
+              | + Add New Record  |
+              | [Date] [Weight]   |
+              +-------------------+
+              | Existing Records  |
+              | Jan 28: 4.8 kg [x]|
+              | Jan 26: 4.7 kg [x]|
+              | ...               |
+              +-------------------+
 ```
 
 ---
 
-## Color Palette
+## 2. Cat Profile Optimization
 
-**Primary Colors:**
-- Background: `#F8F6F3` (warm off-white)
-- Foreground: `#2C2C2C` (charcoal)
-- Accent: `#7D8471` (sage green, Nordic nature)
+Simplify the main profile card and move detailed dates to a hover tooltip on the hero image.
 
-**Supporting Colors:**
-- Card Background: `rgba(255, 255, 255, 0.85)` (glassmorphism)
-- Muted Text: `#8B8B8B` (warm gray)
-- Border: `#E8E4DF` (subtle warm gray)
-- Chart Line: `#2C2C2C` with sage gradient fill
+### Current State
+6 items displayed: Name, Breed (Tabby Cat Li Hua), Sex, Birthday, Arrived Home, Neutered
+
+### New Design
+
+**Main Profile Card (4 items only):**
+| NAME | BREED | SEX | AGE |
+|------|-------|-----|-----|
+| Nico | Tabby | Male | 8 months |
+
+- Breed simplified to just "Tabby" (cleaner)
+- Age calculated dynamically from birthday
+- Horizontal layout on all screen sizes
+
+**Hero Section Hover Overlay:**
+When hovering over the hero image, display the three milestone dates:
+- Birthday: May 6, 2025
+- Arrived Home: December 20, 2025
+- Neutered: January 14, 2026
+
+This creates an elegant "discover more" interaction.
+
+### Age Calculation Logic
+```typescript
+const calculateAge = (birthday: string) => {
+  const birthDate = new Date(birthday);
+  const now = new Date();
+  const months = (now.getFullYear() - birthDate.getFullYear()) * 12 
+               + (now.getMonth() - birthDate.getMonth());
+  
+  if (months < 12) return `${months} months`;
+  const years = Math.floor(months / 12);
+  const remainingMonths = months % 12;
+  return remainingMonths > 0 
+    ? `${years} yr ${remainingMonths} mo` 
+    : `${years} year${years > 1 ? 's' : ''}`;
+};
+```
 
 ---
 
-## Typography
+## 3. Typography Enhancement
 
-**Headings:** Playfair Display (Google Fonts) - Elegant serif
-- Hero title: 4rem, letter-spacing 0.3em, uppercase
-- Section titles: 1.25rem, weight 500
+Upgrade to more premium, Nordic-inspired fonts.
 
-**Body:** Inter (already available) - Clean sans-serif
-- Data values: 2rem, semibold, tracking tight
-- Labels: 0.75rem, uppercase, letter-spacing 0.1em
+### Font Selection
 
----
+**Headlines (Hero, Titles):**
+- **Cormorant Garamond** - Elegant, high-end editorial feel
+- Alternative: Keep Playfair Display but use lighter weights
 
-## Components to Create/Modify
+**Body & Labels:**
+- **DM Sans** - Modern, geometric, excellent readability
+- Cleaner than Source Sans Pro
 
-### 1. New: HeroSection Component
-- Full viewport height hero with cat photo background
-- Gradient overlay (transparent to warm off-white)
-- "NICO" title with elegant typography
-- "Weight Journey" subtitle
-- Smooth scroll indicator
+**Data Values:**
+- **Tabular Lining Figures** from DM Sans for aligned numbers
 
-### 2. New: CatProfile Component
-Cat's basic information displayed elegantly:
-- **Name:** Nico
-- **Breed:** Tabby Cat (Li Hua)
-- **Sex:** Male
-- **Birthday:** May 6, 2025
-- **Arrived Home:** December 20, 2025
-- **Neutered:** January 14, 2026
+### CSS Updates
 
-Layout: Horizontal on desktop, vertical grid on mobile
+```css
+/* Premium Font Stack */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap');
 
-### 3. Enhanced: WeightChart Component
-- Larger chart height (350px)
-- Glassmorphism card with backdrop blur
-- Chart line in charcoal with sage green gradient fill
-- English labels (Jan, Feb, etc.)
-- Floating above hero with negative margin effect
+:root {
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'DM Sans', sans-serif;
+}
 
-### 4. Updated: WeightStats Component
-- English labels: "Current", "Average", "High", "Low"
-- Refined typography with uppercase labels
-- Subtle card borders
+/* Hero title - more elegant spacing */
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  letter-spacing: 0.35em;
+}
 
-### 5. Updated: WeightInput Component
-- English placeholder: "Enter weight"
-- Button text: "Record"
-- Date display: "Today, January 29"
-
-### 6. Updated: WeightHistory Component
-- English: "History", "records"
-- Date format: "January 28, 2026"
-
-### 7. Updated: ToolBar Component
-- English: "Export CSV", "Clear Data"
-- Confirmation dialogs in English
-
-### 8. Updated: Index Page
-- New layout with hero section
-- Reordered sections for visual hierarchy
-- Chart positioned prominently after hero
+/* Labels - refined tracking */
+.label-premium {
+  font-family: var(--font-body);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+}
+```
 
 ---
 
@@ -153,86 +141,98 @@ Layout: Horizontal on desktop, vertical grid on mobile
 
 | File | Changes |
 |------|---------|
-| `src/index.css` | New color palette, custom fonts import, glassmorphism utilities |
-| `tailwind.config.ts` | Add Playfair Display font family, custom colors |
-| `src/pages/Index.tsx` | New layout structure with hero, profile section |
-| `src/components/HeroSection.tsx` | **NEW** - Hero with photo background |
-| `src/components/CatProfile.tsx` | **NEW** - Cat info card |
-| `src/components/WeightChart.tsx` | Enhanced styling, English labels |
-| `src/components/WeightStats.tsx` | English labels, refined design |
-| `src/components/WeightInput.tsx` | English text, refined styling |
-| `src/components/WeightHistory.tsx` | English text |
-| `src/components/ToolBar.tsx` | English text |
+| `index.html` | Update Google Fonts import |
+| `src/index.css` | New font variables, refined typography classes |
+| `tailwind.config.ts` | Update font family definitions |
+| `src/components/ToolBar.tsx` | Add "Edit Data" button |
+| `src/components/DataEditor.tsx` | **NEW** - Edit/add records panel |
+| `src/components/CatProfile.tsx` | Simplified 4-item layout with age |
+| `src/components/HeroSection.tsx` | Add hover overlay for dates |
+| `src/pages/Index.tsx` | Pass edit handlers to ToolBar |
+| `src/hooks/useWeightData.ts` | Add updateRecord function |
 
 ---
 
-## Technical Implementation Details
+## Technical Details
 
-### Google Fonts Integration
-Add to `index.html`:
-```html
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
-```
-
-### CSS Variables (New Palette)
-```css
-:root {
-  --background: 30 20% 97%;      /* #F8F6F3 */
-  --foreground: 0 0% 17%;        /* #2C2C2C */
-  --accent: 90 8% 48%;           /* #7D8471 sage */
-  --card: 0 0% 100%;
-  --muted-foreground: 0 0% 55%;  /* #8B8B8B */
-  --border: 30 15% 90%;          /* #E8E4DF */
-}
-```
-
-### Glassmorphism Card Style
-```css
-.glass-card {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-}
-```
-
-### Hero Background with Gradient Fade
-```css
-.hero-overlay {
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    transparent 40%,
-    hsl(var(--background)) 100%
-  );
-}
-```
-
----
-
-## Cat Profile Data Structure
+### DataEditor Component Structure
 
 ```typescript
-const catProfile = {
-  name: "Nico",
-  breed: "Tabby Cat (Li Hua)",
-  sex: "Male",
-  birthday: "2025-05-06",
-  arrivedHome: "2025-12-20",
-  neuteredDate: "2026-01-14",
-};
+interface DataEditorProps {
+  records: WeightRecord[];
+  onAdd: (weight: number, date: string) => void;
+  onUpdate: (date: string, weight: number) => void;
+  onDelete: (date: string) => void;
+}
+```
+
+Uses:
+- Sheet component for slide-out panel
+- Calendar component for date selection
+- Input for weight entry
+- ScrollArea for record list
+
+### Hero Hover Implementation
+
+```tsx
+<div className="group relative">
+  {/* Background Image */}
+  <div className="absolute inset-0 bg-cover ..." />
+  
+  {/* Hover Info - Appears on hover */}
+  <div className="absolute bottom-20 left-1/2 -translate-x-1/2 
+                  opacity-0 group-hover:opacity-100 
+                  transition-opacity duration-500">
+    <div className="flex gap-8 text-foreground/80">
+      <div>
+        <span className="label-premium">Birthday</span>
+        <span>May 6, 2025</span>
+      </div>
+      <div>
+        <span className="label-premium">Arrived</span>
+        <span>Dec 20, 2025</span>
+      </div>
+      <div>
+        <span className="label-premium">Neutered</span>
+        <span>Jan 14, 2026</span>
+      </div>
+    </div>
+  </div>
+</div>
 ```
 
 ---
 
-## Responsive Considerations
+## Visual Summary
 
-- **Desktop:** Full hero experience, horizontal profile layout
-- **Tablet:** Scaled hero, 2-column profile grid
-- **Mobile:** Compact hero (70vh), vertical profile stack, full-width cards
+### Before
+```text
+Profile Card:
+[Name] [Breed: Tabby Cat (Li Hua)] [Sex] [Birthday] [Arrived] [Neutered]
+       ^^^ 6 items, feels crowded
+```
+
+### After
+```text
+Hero Section:
++------------------------------------------+
+|          [Hover to see dates]            |
+|    NICO                                  |
+|    Weight Journey                        |
+|                                          |
+|  Birthday: May 6 | Arrived: Dec 20 | ... |  <- appears on hover
++------------------------------------------+
+
+Profile Card:
+[NAME: Nico] [BREED: Tabby] [SEX: Male] [AGE: 8 months]
+             ^^^ Clean, 4 essential items
+```
 
 ---
 
 ## Summary
 
-This redesign transforms the app from a simple tracker into an elegant, photography-inspired showcase of Nico's health journey. The weight chart becomes the visual centerpiece, floating above a beautiful cat photo with a seamless gradient transition. Premium typography and a warm Nordic color palette create a sophisticated, gallery-like experience while maintaining full functionality.
+1. **Edit Feature**: New DataEditor sheet component with date picker for adding/editing any record, accessible via toolbar
+2. **Profile Optimization**: Simplified to 4 key items (Name, Breed=Tabby, Sex, Age), milestone dates moved to hero hover overlay
+3. **Typography**: Upgrade to Cormorant Garamond (display) + DM Sans (body) for a more premium Nordic aesthetic
 
