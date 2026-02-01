@@ -1,4 +1,5 @@
 import { ChevronDown } from 'lucide-react';
+import nicoHero from '@/assets/nico-hero.jpg';
 
 const milestones = {
   birthday: "May 6, 2025",
@@ -20,7 +21,7 @@ export function HeroSection() {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-700 group-hover:scale-105"
         style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=1920&q=80')`,
+          backgroundImage: `url(${nicoHero})`,
         }}
       />
       
