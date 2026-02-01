@@ -64,6 +64,9 @@ const Index = () => {
             onExport={exportToCSV}
             onClear={clearAllRecords}
             hasData={records.length > 0}
+            records={records}
+            onAddRecord={addRecord}
+            onDeleteRecord={deleteRecord}
           />
         </section>
       </main>

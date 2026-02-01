@@ -14,8 +14,14 @@ export default {
   	},
   	extend: {
   		fontFamily: {
+  			display: [
+  				'Cormorant Garamond',
+  				'ui-serif',
+  				'Georgia',
+  				'serif'
+  			],
   			serif: [
-  				'Source Serif Pro',
+  				'Cormorant Garamond',
   				'ui-serif',
   				'Georgia',
   				'Cambria',
@@ -24,7 +30,7 @@ export default {
   				'serif'
   			],
   			sans: [
-  				'Source Sans Pro',
+  				'DM Sans',
   				'ui-sans-serif',
   				'system-ui',
   				'-apple-system',
@@ -33,11 +39,9 @@ export default {
   				'Roboto',
   				'Helvetica Neue',
   				'Arial',
-  				'Noto Sans',
   				'sans-serif'
   			],
   			mono: [
-  				'Source Code Pro',
   				'ui-monospace',
   				'SFMono-Regular',
   				'Menlo',
