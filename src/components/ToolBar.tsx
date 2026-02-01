@@ -11,16 +11,21 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Download, Trash2 } from 'lucide-react';
+import { DataEditor } from '@/components/DataEditor';
+import type { WeightRecord } from '@/hooks/useWeightData';
 
 interface ToolBarProps {
   onExport: () => void;
   onClear: () => void;
   hasData: boolean;
+  records: WeightRecord[];
+  onAddRecord: (weight: number, date: string) => void;
+  onDeleteRecord: (date: string) => void;
 }
 
-export function ToolBar({ onExport, onClear, hasData }: ToolBarProps) {
+export function ToolBar({ onExport, onClear, hasData, records, onAddRecord, onDeleteRecord }: ToolBarProps) {
   return (
-    <div className="flex gap-3 justify-center">
+    <div className="flex gap-3 justify-center flex-wrap">
       <Button
         variant="outline"
         size="sm"
@@ -31,6 +36,12 @@ export function ToolBar({ onExport, onClear, hasData }: ToolBarProps) {
         <Download className="h-4 w-4" />
         Export CSV
       </Button>
+      
+      <DataEditor
+        records={records}
+        onAdd={onAddRecord}
+        onDelete={onDeleteRecord}
+      />
       
       <AlertDialog>
         <AlertDialogTrigger asChild>

@@ -1,5 +1,11 @@
 import { ChevronDown } from 'lucide-react';
 
+const milestones = {
+  birthday: "May 6, 2025",
+  arrivedHome: "Dec 20, 2025",
+  neuteredDate: "Jan 14, 2026",
+};
+
 export function HeroSection() {
   const scrollToContent = () => {
     const chartSection = document.getElementById('weight-chart');
@@ -9,10 +15,10 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative h-screen min-h-[600px] flex flex-col items-center justify-center overflow-hidden">
+    <section className="group relative h-screen min-h-[600px] flex flex-col items-center justify-center overflow-hidden">
       {/* Background Image */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-700 group-hover:scale-105"
         style={{
           backgroundImage: `url('https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=1920&q=80')`,
         }}
@@ -23,12 +29,30 @@ export function HeroSection() {
       
       {/* Content */}
       <div className="relative z-10 text-center px-4">
-        <h1 className="hero-title text-5xl md:text-7xl lg:text-8xl font-medium text-foreground mb-4">
+        <h1 className="hero-title text-5xl md:text-7xl lg:text-8xl font-light text-foreground mb-4">
           NICO
         </h1>
         <p className="font-sans text-lg md:text-xl text-muted-foreground tracking-wide">
           Weight Journey
         </p>
+      </div>
+
+      {/* Hover Info - Milestone dates */}
+      <div className="absolute bottom-24 left-1/2 -translate-x-1/2 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+        <div className="flex gap-8 md:gap-12 text-center">
+          <div>
+            <span className="label-premium block mb-1">Birthday</span>
+            <span className="text-sm text-foreground/80">{milestones.birthday}</span>
+          </div>
+          <div>
+            <span className="label-premium block mb-1">Arrived</span>
+            <span className="text-sm text-foreground/80">{milestones.arrivedHome}</span>
+          </div>
+          <div>
+            <span className="label-premium block mb-1">Neutered</span>
+            <span className="text-sm text-foreground/80">{milestones.neuteredDate}</span>
+          </div>
+        </div>
       </div>
       
       {/* Scroll Indicator */}
