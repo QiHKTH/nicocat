@@ -30,7 +30,7 @@ function ProfileItem({ label, value }: ProfileItemProps) {
   return (
     <div className="text-center">
       <span className="label-premium block mb-1">{label}</span>
-      <span className="text-base font-medium text-foreground">{value}</span>
+      <span className="text-lg font-medium text-foreground">{value}</span>
     </div>
   );
 }

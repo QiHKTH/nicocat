@@ -161,7 +161,7 @@
 
   /* Premium label styling */
   .label-premium {
-    @apply text-xs uppercase text-muted-foreground;
+    @apply text-xs uppercase text-secondary;
     font-family: var(--font-sans);
     font-weight: 500;
     letter-spacing: 0.12em;

@@ -53,7 +53,7 @@ export function WeightChart({ records }: WeightChartProps) {
     return (
       <Card className="glass-card border-border/30">
         <CardHeader className="pb-2">
-          <CardTitle className="font-serif text-xl font-medium">Weight Trend</CardTitle>
+          <CardTitle className="text-xl font-medium">Weight Trend</CardTitle>
         </CardHeader>
         <CardContent className="h-[350px] flex items-center justify-center">
           <p className="text-muted-foreground text-sm">No data yet</p>
@@ -65,7 +65,7 @@ export function WeightChart({ records }: WeightChartProps) {
   return (
     <Card className="glass-card border-border/30">
       <CardHeader className="pb-2 flex flex-row items-center justify-between">
-        <CardTitle className="font-serif text-xl font-medium">Weight Trend</CardTitle>
+        <CardTitle className="text-xl font-medium">Weight Trend</CardTitle>
         {records.length > 30 && (
           <Button
             variant="ghost"
