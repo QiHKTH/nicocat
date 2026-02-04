@@ -88,7 +88,7 @@ export function ToolBar({ onExport, onClear, hasData, records, onAddRecord, onDe
             className="gap-2 text-muted-foreground"
           >
             <LogOut className="h-4 w-4" />
-            退出管理
+            Logout
           </Button>
         </>
       ) : (
@@ -99,7 +99,7 @@ export function ToolBar({ onExport, onClear, hasData, records, onAddRecord, onDe
           className="gap-2"
         >
           <Lock className="h-4 w-4" />
-          管理员
+          Admin
         </Button>
       )}
       
