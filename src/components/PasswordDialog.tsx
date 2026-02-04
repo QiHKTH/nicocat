@@ -46,16 +46,16 @@ export function PasswordDialog({ open, onOpenChange, onVerify }: PasswordDialogP
         <DialogHeader>
           <DialogTitle className="font-serif flex items-center gap-2">
             <Lock className="h-4 w-4" />
-            管理员验证
+            Admin Access
           </DialogTitle>
           <DialogDescription>
-            请输入密码以访问编辑功能
+            Enter password to access edit features
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
           <Input
             type="password"
-            placeholder="输入密码"
+            placeholder="Enter password"
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
@@ -65,7 +65,7 @@ export function PasswordDialog({ open, onOpenChange, onVerify }: PasswordDialogP
             autoFocus
           />
           {error && (
-            <p className="text-sm text-destructive mt-2">密码错误，请重试</p>
+            <p className="text-sm text-destructive mt-2">Incorrect password, please try again</p>
           )}
           <DialogFooter className="mt-4">
             <Button type="submit" disabled={!password}>
