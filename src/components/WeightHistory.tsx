@@ -50,7 +50,7 @@ export function WeightHistory({ records, onDelete }: WeightHistoryProps) {
         <CollapsibleTrigger asChild>
           <CardHeader className="py-4 px-5 cursor-pointer hover:bg-muted/50 transition-colors">
             <div className="flex items-center justify-between">
-              <CardTitle className="font-serif text-lg font-medium">History</CardTitle>
+              <CardTitle className="text-lg font-medium">History</CardTitle>
               <div className="flex items-center gap-2 text-muted-foreground">
                 <span className="label-premium">{records.length} records</span>
                 {isOpen ? (
@@ -87,7 +87,7 @@ export function WeightHistory({ records, onDelete }: WeightHistoryProps) {
                       </AlertDialogTrigger>
                       <AlertDialogContent>
                         <AlertDialogHeader>
-                          <AlertDialogTitle className="font-serif">Delete Record</AlertDialogTitle>
+                          <AlertDialogTitle>Delete Record</AlertDialogTitle>
                           <AlertDialogDescription>
                             Are you sure you want to delete the record from {formatDate(record.date)}? This action cannot be undone.
                           </AlertDialogDescription>
