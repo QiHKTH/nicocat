@@ -3,7 +3,7 @@ import { HeroSection } from '@/components/HeroSection';
 import { CatProfile } from '@/components/CatProfile';
 import { WeightChart } from '@/components/WeightChart';
 import { WeightStats } from '@/components/WeightStats';
-import { WeightInput } from '@/components/WeightInput';
+// WeightInput removed - editing is now handled through DataEditor with password protection
 import { WeightHistory } from '@/components/WeightHistory';
 import { ToolBar } from '@/components/ToolBar';
 
@@ -48,10 +48,7 @@ const Index = () => {
           <WeightStats {...stats} />
         </section>
 
-        {/* Weight Input */}
-        <section className="max-w-2xl mx-auto px-4 mb-12">
-          <WeightInput onAdd={addRecord} />
-        </section>
+        {/* Note: Weight Input removed - use Edit Data for adding records */}
 
         {/* History */}
         <section className="max-w-2xl mx-auto px-4 mb-12">
