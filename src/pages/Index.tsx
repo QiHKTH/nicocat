@@ -70,7 +70,7 @@ const Index = () => {
 
       {/* Footer */}
       <footer className="py-8 text-center">
-        <p className="label-premium">Data stored locally in your browser</p>
+        <p className="label-premium">Den vackraste katten i Solna.</p>
       </footer>
     </div>
   );
