@@ -13,7 +13,7 @@ const calculateAge = (birthday: string) => {
   const months = (now.getFullYear() - birthDate.getFullYear()) * 12 
                + (now.getMonth() - birthDate.getMonth());
   
-  if (months < 12) return `${months} months`;
+  if (months < 12) return `${months} mo`;
   const years = Math.floor(months / 12);
   const remainingMonths = months % 12;
   return remainingMonths > 0 
