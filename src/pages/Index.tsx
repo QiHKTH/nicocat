@@ -34,6 +34,9 @@ const Index = () => {
         className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${nicoHero})` }}
       />
+      
+      {/* Fixed Overlay - stays with the background */}
+      <div className="fixed inset-0 z-0 hero-overlay pointer-events-none" />
       {/* Hero Section */}
       <HeroSection />
 
