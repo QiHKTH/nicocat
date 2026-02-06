@@ -13,6 +13,7 @@ export default defineConfig(({ mode }) => ({
       overlay: false,
     },
   },
+  base: "/nicocat/",
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
     alias: {
