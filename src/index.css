@@ -148,14 +148,14 @@
     border: 1px solid rgba(255, 255, 255, 0.6);
   }
 
-  /* Hero overlay gradient - subtle fade for text readability */
+  /* Hero overlay gradient - warm fade for softer photo appearance */
   .hero-overlay {
     background: linear-gradient(
       to bottom,
-      hsl(0 0% 0% / 0.15) 0%,
-      transparent 40%,
-      transparent 60%,
-      hsl(0 0% 0% / 0.2) 100%
+      hsl(35 25% 97% / 0.3) 0%,
+      hsl(35 25% 97% / 0.2) 40%,
+      hsl(35 25% 97% / 0.4) 70%,
+      hsl(35 25% 97% / 0.7) 100%
     );
   }
 
