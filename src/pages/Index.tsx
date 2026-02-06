@@ -1,4 +1,4 @@
-import { useState } from 'react'; // 👈 1. 引入 useState
+import { useState } from 'react';
 import { useWeightData } from '@/hooks/useWeightData';
 import { HeroSection } from '@/components/HeroSection';
 import { CatProfile } from '@/components/CatProfile';
@@ -9,7 +9,6 @@ import { ToolBar } from '@/components/ToolBar';
 import nicoHero from '@/assets/nico-hero.jpg';
 
 const Index = () => {
-  // 👈 2. 添加一个状态来控制是否激活（点击）了首屏
   const [isHeroActive, setIsHeroActive] = useState(false);
 
   const {
@@ -33,24 +32,25 @@ const Index = () => {
   return (
     <div className="min-h-screen overscroll-y-none">
       
-      {/* 👇 3. 重大修改：使用真实的 <img> 标签代替 CSS 背景图 */}
-      {/* 这样在移动端滑动时更稳定，不会因为地址栏变化而乱跳 */}
+      {/* 1. 背景图片层：移除了 scale 缩放，保持静止 */}
       <img 
         src={nicoHero}
         alt="Nico Hero Background"
-        // 使用 object-cover 来填满屏幕
-        // transition-transform duration-700 添加平滑过渡效果
-        // 根据 isHeroActive 状态，决定是否加上 scale-105 (放大5%)
-        className={`fixed top-0 left-0 w-full h-full object-cover z-0 pointer-events-none transition-transform duration-1000 ease-in-out will-change-transform ${
-          isHeroActive ? 'scale-105' : 'scale-100'
-        }`}
+        className="fixed top-0 left-0 w-full h-[100dvh] object-cover z-0 pointer-events-none"
       />
       
-      {/* Fixed Overlay */}
-      <div className="fixed inset-0 z-0 hero-overlay pointer-events-none transition-opacity duration-1000" style={{ opacity: isHeroActive ? 0.7 : 0.4 }} />
+      {/* 2. 滤镜遮罩层：关键修改在这里 */}
+      {/* bg-black: 使用黑色遮罩，比之前的白色/灰色更有质感 */}
+      {/* backdrop-blur: 点击后添加一点毛玻璃效果 */}
+      <div 
+        className={`fixed inset-0 z-0 bg-white transition-all duration-700 ease-in-out pointer-events-none ${
+          isHeroActive 
+            ? 'opacity-50 backdrop-blur-none' // 点击后：变暗 + 模糊 (突显文字)
+            : 'opacity-20 backdrop-blur-none' // 平时：几乎透明 (突显照片)
+        }`} 
+      />
       
       {/* Hero Section */}
-      {/* 👇 4. 将状态和控制函数传递给 HeroSection 组件 */}
       <HeroSection 
         isActive={isHeroActive} 
         onToggle={() => setIsHeroActive(!isHeroActive)} 
