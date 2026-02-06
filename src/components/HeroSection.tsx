@@ -1,5 +1,4 @@
 import { ChevronDown } from 'lucide-react';
-import nicoHero from '@/assets/nico-hero.jpg';
 
 const milestones = {
   birthday: "May 6, 2025",
@@ -17,15 +16,7 @@ export function HeroSection() {
 
   return (
     <section className="group relative h-screen min-h-[600px] flex flex-col items-center justify-center overflow-hidden">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-700 group-hover:scale-105"
-        style={{
-          backgroundImage: `url(${nicoHero})`,
-        }}
-      />
-      
-      {/* Gradient Overlay */}
+      {/* Gradient Overlay - background image is now fixed in parent */}
       <div className="absolute inset-0 hero-overlay" />
       
       {/* Content */}

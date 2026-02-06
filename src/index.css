@@ -140,23 +140,30 @@
 }
 
 @layer components {
-  /* Glassmorphism Card */
+  /* Glassmorphism Card - increased opacity for readability over photo */
   .glass-card {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
   }
 
-  /* Hero overlay gradient */
+  /* Hero overlay gradient - subtle fade for text readability */
   .hero-overlay {
     background: linear-gradient(
       to bottom,
-      transparent 0%,
-      transparent 30%,
-      hsl(35 25% 97% / 0.4) 60%,
-      hsl(35 25% 97%) 100%
+      hsl(0 0% 0% / 0.15) 0%,
+      transparent 40%,
+      transparent 60%,
+      hsl(0 0% 0% / 0.2) 100%
     );
+  }
+
+  /* Content area background for sections over the fixed photo */
+  .content-overlay {
+    background: hsl(var(--background) / 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
 
   /* Premium label styling */
