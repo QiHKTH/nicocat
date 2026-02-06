@@ -30,23 +30,28 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen overscroll-y-none">
+    // 去掉 overscroll-y-none，恢复自然滚动
+    <div className="min-h-screen bg-background">
       
-      {/* 1. 背景图片层：移除了 scale 缩放，保持静止 */}
+      {/* 1. 背景图片：改为 absolute */}
+      {/* h-[100dvh] 保证首屏填满，但会随页面滚动划走 */}
       <img 
         src={nicoHero}
         alt="Nico Hero Background"
-        className="fixed top-0 left-0 w-full h-[100dvh] object-cover z-0 pointer-events-none"
+        className="absolute top-0 left-0 w-full h-[100dvh] object-cover z-0 pointer-events-none"
       />
       
-      {/* 2. 滤镜遮罩层：关键修改在这里 */}
-      {/* bg-black: 使用黑色遮罩，比之前的白色/灰色更有质感 */}
-      {/* backdrop-blur: 点击后添加一点毛玻璃效果 */}
+      {/* 2. 渐变遮罩层 (Gradient Overlay) */}
+      {/* bg-gradient-to-b: 从上到下渐变
+          from-transparent: 顶部完全透明 (0%)
+          to-white/90: 底部变为 90% 不透明的白色
+          这样 NICO 的名字在上面很清楚，下面的详细信息有白色背景衬托
+      */}
       <div 
-        className={`fixed inset-0 z-0 bg-white transition-all duration-700 ease-in-out pointer-events-none ${
+        className={`absolute top-0 left-0 w-full h-[100dvh] z-0 transition-opacity duration-700 ease-in-out pointer-events-none bg-gradient-to-b from-transparent via-white/10 to-white/90 ${
           isHeroActive 
-            ? 'opacity-50 backdrop-blur-none' // 点击后：变暗 + 模糊 (突显文字)
-            : 'opacity-20 backdrop-blur-none' // 平时：几乎透明 (突显照片)
+            ? 'opacity-100' // 点击后显示渐变
+            : 'opacity-0'   // 平时隐藏
         }`} 
       />
       
@@ -57,8 +62,11 @@ const Index = () => {
       />
 
       {/* Main Content */}
-      <main className="relative z-10">
-        <section id="weight-chart" className="max-w-4xl mx-auto px-4 -mt-24 mb-12">
+      {/* 添加 bg-background (白色)，确保内容盖过图片时背景是实心的 */}
+      <main className="relative z-10 bg-background rounded-t-3xl shadow-[0_-20px_40px_rgba(0,0,0,0.1)]">
+        
+        {/* 这里加一点 padding-top，让图表和上面的 Hero 拉开距离 */}
+        <section id="weight-chart" className="max-w-4xl mx-auto px-4 pt-12 mb-12">
           <WeightChart records={records} />
         </section>
 
@@ -86,7 +94,7 @@ const Index = () => {
         </section>
       </main>
 
-      <footer className="py-8 text-center relative z-10">
+      <footer className="py-8 text-center bg-background relative z-10">
         <p className="label-premium">Den vackraste katten i Solna.</p>
       </footer>
     </div>
