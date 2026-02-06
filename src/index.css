@@ -148,15 +148,9 @@
     border: 1px solid rgba(255, 255, 255, 0.6);
   }
 
-  /* Hero overlay gradient - warm fade for softer photo appearance */
+  /* Hero overlay - uniform semi-transparent warm filter */
   .hero-overlay {
-    background: linear-gradient(
-      to bottom,
-      hsl(35 25% 97% / 0.3) 0%,
-      hsl(35 25% 97% / 0.2) 40%,
-      hsl(35 25% 97% / 0.4) 70%,
-      hsl(35 25% 97% / 0.7) 100%
-    );
+    background: hsl(35 25% 97% / 0.35);
   }
 
   /* Content area background for sections over the fixed photo */

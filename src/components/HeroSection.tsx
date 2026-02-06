@@ -16,8 +16,7 @@ export function HeroSection() {
 
   return (
     <section className="group relative h-screen min-h-[600px] flex flex-col items-center justify-center overflow-hidden">
-      {/* Gradient Overlay - background image is now fixed in parent */}
-      <div className="absolute inset-0 hero-overlay" />
+      {/* Overlay removed - now handled by fixed layer in Index */}
       
       {/* Content */}
       <div className="relative z-10 text-center px-4">
