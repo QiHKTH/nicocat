@@ -6,6 +6,7 @@ import { WeightStats } from '@/components/WeightStats';
 // WeightInput removed - editing is now handled through DataEditor with password protection
 import { WeightHistory } from '@/components/WeightHistory';
 import { ToolBar } from '@/components/ToolBar';
+import nicoHero from '@/assets/nico-hero.jpg';
 
 const Index = () => {
   const {
@@ -27,7 +28,12 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
+      {/* Fixed Background Layer */}
+      <div 
+        className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${nicoHero})` }}
+      />
       {/* Hero Section */}
       <HeroSection />
 
